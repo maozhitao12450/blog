@@ -1,4 +1,4 @@
-tag=$(date "+%Y%m%d%H%M%S")
+tag="v"$(date "+%Y%m%d%H%M%S")
 git tag $tag 
-git push origin --tags
-ssh root@124.222.0.48 "cd /blog;git pull;git checkout $tag;cp  -uf  ./blogs/* /hexo/source/_posts/;cd /hexo;hexo g"
+git push origin $tag
+ssh root@124.222.0.48 "cd /blog;git pull;git checkout -b $tag;cp  -uf  ./blogs/* /hexo/source/_posts/;cd /hexo;hexo g"
