@@ -14,3 +14,4 @@ echo "重新构建静态文件完成"
 ssh root@124.222.0.48 "cd /nginx;docker-compose down;docker-compose up -d ;"
 echo "重新构建docker完成" 
 
+# */2 * * * * date >> /tmp/test-crontab.txt
