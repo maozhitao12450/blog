@@ -1,4 +1,16 @@
 tag="v"$(date "+%Y%m%d%H%M%S")
 git tag $tag 
+echo "创建tag完成："$tag
 git push origin $tag
-ssh root@124.222.0.48 "cd /blog;git pull;git checkout -b $tag;cp -uf  ./blogs/*.md /hexo/source/_posts/;cd /hexo;hexo g"
+echo "上传tag成功"
+ssh root@124.222.0.48 "cd /blog;git fetch;git checkout -b $tag;"
+echo "下载tag成功"
+ssh root@124.222.0.48 "rm -rf /hexo/source/_posts/*.md;"
+echo "清理文件完成" 
+ssh root@124.222.0.48 "cp /blog/blogs/*.md /hexo/source/_posts/;" 
+echo "复制完成"
+ssh root@124.222.0.48 "cd /hexo;hexo clean; hexo g;" 
+echo "重新构建静态文件完成"
+ssh root@124.222.0.48 "cd /nginx;docker-compose down;docker-compose up -d ;"
+echo "重新构建docker完成" 
+
